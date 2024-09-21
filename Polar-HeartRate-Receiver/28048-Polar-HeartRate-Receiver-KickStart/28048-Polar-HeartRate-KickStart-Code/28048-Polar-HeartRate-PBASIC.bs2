@@ -1,0 +1,28 @@
+' {$STAMP BS2}
+' {$PBASIC 2.5}
+
+'Definitions
+HR_RX       PIN 0
+oldSample   VAR Bit
+sample      VAR Bit
+
+'Set signal pin to input
+INPUT HR_RX
+
+
+DEBUG CLS, "Waiting for heart beat...", CR
+
+'Wait until a heart beat is detected
+DO UNTIL HR_RX
+LOOP
+
+DEBUG "Heart beat detected!", CR
+
+'Main Loop
+DO
+
+  sample = HR_RX       'Store signal output
+  IF sample AND oldSample <> sample THEN DEBUG "Beat", CR
+  oldSample = sample   'Store last signal received
+
+LOOP
